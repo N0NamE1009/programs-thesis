@@ -1,0 +1,617 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23854,        609]
+NotebookOptionsPosition[     23171,        590]
+NotebookOutlinePosition[     23578,        606]
+CellTagsIndexPosition[     23535,        603]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"rotationTransform", "[", 
+    RowBox[{"\[Zeta]_", ",", "\[Alpha]_"}], "]"}], ":=", 
+   RowBox[{"\[Zeta]", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"\[ImaginaryI]", " ", "\[Alpha]"}]]}]}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"translationTransform", "[", 
+   RowBox[{"\[Zeta]_", ",", "\[Mu]_"}], "]"}], ":=", 
+  RowBox[{"\[Zeta]", "+", "\[Mu]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"joukowskiTransform", "[", "\[Zeta]_", "]"}], ":=", 
+  RowBox[{"0.5", "*", 
+   RowBox[{"(", 
+    RowBox[{"\[Zeta]", "+", 
+     FractionBox["1", "\[Zeta]"]}], ")"}]}]}], "\n", 
+ RowBox[{"Function", "[", 
+  RowBox[{"\[Zeta]", ",", 
+   RowBox[{"0.5", "*", 
+    RowBox[{"(", 
+     RowBox[{"\[Zeta]", "+", 
+      FractionBox["1", "\[Zeta]"]}], ")"}]}]}], "]"}], "\n", 
+ RowBox[{"Function", "[", 
+  RowBox[{"\[Zeta]", ",", 
+   RowBox[{"0.5`", " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Zeta]", "+", 
+      FractionBox["1", "\[Zeta]"]}], ")"}]}]}], "]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Zeta]0C", "[", 
+    RowBox[{"\[Theta]_", ",", "\[Mu]_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "\[Beta]"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", ",", "\[Beta]"}], "}"}], "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Abs", "[", 
+          RowBox[{"1", "-", "\[Mu]"}], "]"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"Arg", "[", 
+           RowBox[{"1", "-", "\[Mu]"}], "]"}]}]}], "}"}]}], ";", 
+      RowBox[{"a", " ", 
+       SuperscriptBox["\[ExponentialE]", 
+        RowBox[{
+         RowBox[{"-", "\[ImaginaryI]"}], 
+         RowBox[{"(", 
+          RowBox[{"\[Theta]", "+", "\[Beta]"}], ")"}]}]]}]}]}], "]"}]}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{"\[Zeta]C", "[", 
+   RowBox[{"\[Theta]_", ",", "\[Mu]_"}], "]"}], ":=", 
+  RowBox[{"translationTransform", "[", 
+   RowBox[{
+    RowBox[{"\[Zeta]0C", "[", 
+     RowBox[{"\[Theta]", ",", "\[Mu]"}], "]"}], ",", "\[Mu]"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"zA", "[", 
+   RowBox[{"\[Theta]_", ",", "\[Mu]_"}], "]"}], ":=", 
+  RowBox[{"joukowskiTransform", "[", 
+   RowBox[{"\[Zeta]C", "[", 
+    RowBox[{"\[Theta]", ",", "\[Mu]"}], "]"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"\[Theta]LE", "[", "\[Mu]_", "]"}], ":=", 
+  RowBox[{"\[Theta]", "/.", 
+   RowBox[{"FindRoot", "[", 
+    RowBox[{
+     RowBox[{"Im", "[", 
+      RowBox[{"zA", "[", 
+       RowBox[{"\[Theta]", ",", "\[Mu]"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Theta]", ",", "\[Pi]"}], "}"}]}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"xLE", "[", "\[Mu]_", "]"}], ":=", 
+  RowBox[{"Chop", "[", 
+   RowBox[{"zA", "[", 
+    RowBox[{
+     RowBox[{"\[Theta]LE", "[", "\[Mu]", "]"}], ",", "\[Mu]"}], "]"}], 
+   "]"}]}], "\n", 
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "a", ",", "c", ",", "gz", ",", "gzA", ",", "gzCrit", ",", "g\[Zeta]", 
+       ",", "g\[Zeta]C", ",", "g\[Zeta]Crit", ",", "g\[Zeta]Tri", ",", "za", 
+       ",", "\[Zeta]c", ",", "\[Beta]", ",", "\[Mu]"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\[Mu]", ",", "a", ",", "\[Beta]"}], "}"}], "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"r", " ", 
+          SuperscriptBox["\[ExponentialE]", 
+           RowBox[{"\[ImaginaryI]", " ", "\[Alpha]"}]]}], ",", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"1", "-", "\[Mu]"}], "]"}], ",", 
+         RowBox[{"-", 
+          RowBox[{"Arg", "[", 
+           RowBox[{"1", "-", "\[Mu]"}], "]"}]}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"\[Mu]", "=", 
+       RowBox[{"r", " ", 
+        SuperscriptBox["\[ExponentialE]", 
+         RowBox[{"\[ImaginaryI]", " ", "\[Alpha]"}]]}]}], 
+      RowBox[{"(*", 
+       RowBox[{
+       "translation", " ", "vector", " ", "as", " ", "complex", " ", 
+        "number"}], "*)"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"a", "=", 
+       RowBox[{"Abs", "[", 
+        RowBox[{"1", "-", "\[Mu]"}], "]"}]}], 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "radius", " ", "of", " ", "circle", " ", "forcing", " ", "circle", 
+         " ", "to", " ", "pass", " ", "through", " ", "\[Zeta]"}], "=", "1"}],
+        "*)"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"\[Beta]", "=", 
+       RowBox[{"-", 
+        RowBox[{"Arg", "[", 
+         RowBox[{"1", "-", "\[Mu]"}], "]"}]}]}], 
+      RowBox[{"(*", 
+       RowBox[{
+       "angle", " ", "in", " ", "reference", " ", "triangle", " ", "opposite",
+         " ", "side", " ", "\[Mu]"}], "*)"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"complex", " ", "plane", " ", "of", " ", "circle"}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"\[Zeta]c", "=", 
+       RowBox[{"\[Zeta]C", "[", 
+        RowBox[{"\[Theta]", ",", "\[Mu]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g\[Zeta]C", "=", 
+       RowBox[{"ParametricPlot", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Re", "[", "\[Zeta]c", "]"}], ",", 
+           RowBox[{"Im", "[", "\[Zeta]c", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\[Theta]", ",", "0", ",", 
+           RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Thick", ",", "Black"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g\[Zeta]Tri", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"EdgeForm", "[", "Thin", "]"}], ",", 
+          RowBox[{"Polygon", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Re", "[", "\[Mu]", "]"}], ",", 
+               RowBox[{"Im", "[", "\[Mu]", "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"g\[Zeta]Crit", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", 
+          RowBox[{"PointSize", "[", "Medium", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"1", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}],
+         "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"g\[Zeta]", "=", 
+       RowBox[{"Show", "[", 
+        RowBox[{"g\[Zeta]C", ",", "g\[Zeta]Tri", ",", "g\[Zeta]Crit", ",", 
+         RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+         RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+         RowBox[{"FrameLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\<x\>\"", ",", "None"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"\"\<y\>\"", ",", "\"\<plano z\>\""}], "}"}]}], "}"}]}], 
+         ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"3.95", " ", "72"}]}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "3"}], ",", 
+         RowBox[{"RotateLabel", "\[Rule]", "False"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"complex", " ", "plane", " ", "of", " ", "airfoil"}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"za", "=", 
+       RowBox[{"zA", "[", 
+        RowBox[{"\[Theta]", ",", "\[Mu]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"c", "=", 
+       RowBox[{"2", "-", 
+        RowBox[{"xLE", "[", "\[Mu]", "]"}]}]}], 
+      RowBox[{"(*", 
+       RowBox[{"chord", " ", "of", " ", "airfoil"}], "*)"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"gzA", "=", 
+       RowBox[{"ParametricPlot", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Re", "[", "za", "]"}], ",", 
+           RowBox[{"Im", "[", "za", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\[Theta]", ",", "0", ",", 
+           RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Thick", ",", "Black"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"gzCrit", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", 
+          RowBox[{"PointSize", "[", "Medium", "]"}], ",", 
+          RowBox[{"Point", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"2", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "2"}], ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}],
+         "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"gz", "=", 
+       RowBox[{"Show", "[", 
+        RowBox[{"gzA", ",", "gzCrit", ",", 
+         RowBox[{"Axes", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Inset", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<c\>\"", ",", "Italic"}], "]"}], ",", 
+                  RowBox[{"StringForm", "[", 
+                   RowBox[{"\"\< = ``\>\"", ",", 
+                    RowBox[{"NumberForm", "[", 
+                    RowBox[{"c", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "2"}], "}"}]}], "]"}]}], "]"}]}], "}"}],
+                 "]"}], ",", 
+               RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "2.3"}], "}"}]}], "]"}], "}"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+         RowBox[{"FrameLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<v\>\"", ",", "Italic"}], "]"}], ",", "None"}], 
+             "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{"\"\<u\>\"", ",", "Italic"}], "]"}], ",", 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<\>\"", ",", "Italic"}], "]"}], ",", 
+                 "\"\< plano w\>\""}], "}"}], "]"}]}], "}"}]}], "}"}]}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"3.95", " ", "72"}]}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "3"}], ",", 
+         RowBox[{"RotateLabel", "\[Rule]", "False"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", "output", " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Row", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"g\[Zeta]", ",", 
+          RowBox[{"Spacer", "[", "14", "]"}], ",", "gz"}], "}"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", 
+         RowBox[{"8.4", " ", "72"}]}]}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", "controls", " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Spacer", "[", "100", "]"}], ",", 
+        "\"\<El c\[IAcute]rculo centrado en  \>\"", ",", 
+        RowBox[{"Superscript", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<r\[ThinSpace]e\>\"", ",", "Italic"}], "]"}], ",", 
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<i\>\"", ",", "Italic"}], "]"}], ",", 
+             "\"\<\[Alpha]\>\""}], "}"}], "]"}]}], "]"}], ",", 
+        "\"\< pasa por el punto cr\[IAcute]tico en z = 1.\>\""}], "}"}], 
+      "]"}], ",", "11"}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"r", ",", ".3", ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}]}], "}"}], ",", "0", 
+         ",", "1"}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "10", "]"}], ",", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{"r", ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "30", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Control", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\[Alpha]", ",", 
+           RowBox[{".7", "\[Pi]"}]}], "}"}], ",", 
+         FractionBox["\[Pi]", "2"], ",", "\[Pi]"}], "}"}], "]"}], ",", 
+      RowBox[{"Spacer", "[", "10", "]"}], ",", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{
+         FractionBox["\[Alpha]", "\[Pi]"], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "2"}], "}"}]}], "]"}], "]"}], ",", 
+      "\"\<\[Pi]\>\""}], "\[IndentingNewLine]", "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Code",
+ CellChangeTimes->{3.9193715297148876`*^9},
+ CellLabel->
+  "In[949]:=",ExpressionUUID->"b78a2b2e-53f3-4484-b4e8-c2bfd363cf86"],
+
+Cell[BoxData[
+ RowBox[{"Function", "[", 
+  RowBox[{"\[Zeta]", ",", 
+   RowBox[{"0.5`", " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Zeta]", "+", 
+      FractionBox["1", "\[Zeta]"]}], ")"}]}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.919371535096674*^9, 3.919371535357309*^9}},
+ CellLabel->
+  "Out[952]=",ExpressionUUID->"b8bd072e-f169-40f8-9890-dd48411f026a"],
+
+Cell[BoxData[
+ RowBox[{"Function", "[", 
+  RowBox[{"\[Zeta]", ",", 
+   RowBox[{"0.5`", " ", 
+    RowBox[{"(", 
+     RowBox[{"\[Zeta]", "+", 
+      FractionBox["1", "\[Zeta]"]}], ")"}]}]}], "]"}]], "Output",
+ CellChangeTimes->{{3.919371535096674*^9, 3.9193715353620253`*^9}},
+ CellLabel->
+  "Out[953]=",ExpressionUUID->"824a894b-6863-4fbd-833a-c09bdf1a5753"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`r$$ = 0.3, $CellContext`\[Alpha]$$ = 
+    2.199114857512855, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[
+       Style[
+        Row[{
+          Spacer[100], "El c\[IAcute]rculo centrado en  ", 
+          Superscript[
+           Style["r\[ThinSpace]e", Italic], 
+           Row[{
+             Style["i", Italic], "\[Alpha]"}]], 
+          " pasa por el punto cr\[IAcute]tico en z = 1."}], 11]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], 0.3, 
+       Style["r", Italic]}, 0, 1}, {{
+       Hold[$CellContext`\[Alpha]$$], 2.199114857512855}, Rational[1, 2] Pi, 
+      Pi}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[10], 
+         Dynamic[
+          NumberForm[$CellContext`r$$, {3, 2}]], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[10], 
+         Dynamic[
+          NumberForm[$CellContext`\[Alpha]$$/Pi, {3, 2}]], "\[Pi]"}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    604.8000000000001, {151.13403309800196`, 156.86596690199804`}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`r$$ = 0.3, $CellContext`\[Alpha]$$ = 
+        2.199114857512855}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`a$, $CellContext`c$, $CellContext`gz$, \
+$CellContext`gzA$, $CellContext`gzCrit$, $CellContext`g\[Zeta]$, \
+$CellContext`g\[Zeta]C$, $CellContext`g\[Zeta]Crit$, \
+$CellContext`g\[Zeta]Tri$, $CellContext`za$, $CellContext`\[Zeta]c$, \
+$CellContext`\[Beta]$, $CellContext`\[Mu]$}, {$CellContext`\[Mu]$, \
+$CellContext`a$, $CellContext`\[Beta]$} = {$CellContext`r$$ 
+           E^(I $CellContext`\[Alpha]$$), 
+           Abs[1 - $CellContext`\[Mu]$], -
+           Arg[1 - $CellContext`\[Mu]$]}; $CellContext`\[Mu]$ = \
+$CellContext`r$$ E^(I $CellContext`\[Alpha]$$); $CellContext`a$ = 
+         Abs[1 - $CellContext`\[Mu]$]; $CellContext`\[Beta]$ = -
+          Arg[1 - $CellContext`\[Mu]$]; $CellContext`\[Zeta]c$ = \
+$CellContext`\[Zeta]C[$CellContext`\[Theta], $CellContext`\[Mu]$]; \
+$CellContext`g\[Zeta]C$ = ParametricPlot[{
+            Re[$CellContext`\[Zeta]c$], 
+            Im[$CellContext`\[Zeta]c$]}, {$CellContext`\[Theta], 0, 2 Pi}, 
+           PlotStyle -> {Thick, Black}]; $CellContext`g\[Zeta]Tri$ = Graphics[{
+            EdgeForm[Thin], 
+            Polygon[{{0, 0}, {
+               Re[$CellContext`\[Mu]$], 
+               Im[$CellContext`\[Mu]$]}, {1, 
+              0}}]}]; $CellContext`g\[Zeta]Crit$ = Graphics[{Black, 
+            PointSize[Medium], 
+            Point[{{1, 0}, {-1, 0}}]}]; $CellContext`g\[Zeta]$ = 
+         Show[$CellContext`g\[Zeta]C$, $CellContext`g\[Zeta]Tri$, \
+$CellContext`g\[Zeta]Crit$, Axes -> None, Frame -> True, 
+           FrameLabel -> {{"x", None}, {"y", "plano z"}}, ImageSize -> 
+           3.95 72, PlotRange -> 3, RotateLabel -> 
+           False]; $CellContext`za$ = $CellContext`zA[$CellContext`\[Theta], \
+$CellContext`\[Mu]$]; $CellContext`c$ = 
+         2 - $CellContext`xLE[$CellContext`\[Mu]$]; $CellContext`gzA$ = 
+         ParametricPlot[{
+            Re[$CellContext`za$], 
+            Im[$CellContext`za$]}, {$CellContext`\[Theta], 0, 2 Pi}, 
+           PlotStyle -> {Thick, Black}]; $CellContext`gzCrit$ = 
+         Graphics[{Black, 
+            PointSize[Medium], 
+            Point[{{2, 0}, {-2, 0}}]}]; $CellContext`gz$ = 
+         Show[$CellContext`gzA$, $CellContext`gzCrit$, Axes -> None, Epilog -> {
+             Inset[
+              Style[
+               Row[{
+                 Style["c", Italic], 
+                 StringForm[" = ``", 
+                  NumberForm[$CellContext`c$, {4, 2}]]}], FontSize -> 12], {
+              2, 2.3}]}, Frame -> True, FrameLabel -> {{
+              Style["v", Italic], None}, {
+              Style["u", Italic], 
+              Row[{
+                Style["", Italic], " plano w"}]}}, ImageSize -> 3.95 72, 
+           PlotRange -> 3, RotateLabel -> False]; Row[{$CellContext`g\[Zeta]$, 
+           Spacer[14], $CellContext`gz$}, ImageSize -> 8.4 72]], 
+      "Specifications" :> {
+        Style[
+         Row[{
+           Spacer[100], "El c\[IAcute]rculo centrado en  ", 
+           Superscript[
+            Style["r\[ThinSpace]e", Italic], 
+            Row[{
+              Style["i", Italic], "\[Alpha]"}]], 
+           " pasa por el punto cr\[IAcute]tico en z = 1."}], 
+         11], {{$CellContext`r$$, 0.3, 
+          Style["r", Italic]}, 0, 1, ControlPlacement -> 
+         1}, {{$CellContext`\[Alpha]$$, 2.199114857512855}, Rational[1, 2] Pi,
+          Pi, ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[10], 
+          Dynamic[
+           NumberForm[$CellContext`r$$, {3, 2}]], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[10], 
+          Dynamic[
+           NumberForm[$CellContext`\[Alpha]$$/Pi, {3, 2}]], "\[Pi]"}]}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{655., {206.13403309800196`, 211.86596690199804`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`\[Zeta]C[
+         Pattern[$CellContext`\[Theta], 
+          Blank[]], 
+         Pattern[$CellContext`\[Mu], 
+          Blank[]]] := $CellContext`translationTransform[
+         $CellContext`\[Zeta]0C[$CellContext`\[Theta], $CellContext`\[Mu]], \
+$CellContext`\[Mu]], $CellContext`translationTransform[
+         Pattern[$CellContext`\[Zeta], 
+          Blank[]], 
+         Pattern[$CellContext`\[Mu], 
+          
+          Blank[]]] := $CellContext`\[Zeta] + $CellContext`\[Mu], \
+$CellContext`\[Zeta]0C[
+         Pattern[$CellContext`\[Theta], 
+          Blank[]], 
+         Pattern[$CellContext`\[Mu], 
+          Blank[]]] := 
+       Module[{$CellContext`a, $CellContext`\[Beta]}, {$CellContext`a, \
+$CellContext`\[Beta]} = {
+            Abs[1 - $CellContext`\[Mu]], -
+            Arg[1 - $CellContext`\[Mu]]}; $CellContext`a/
+          E^(I ($CellContext`\[Theta] + $CellContext`\[Beta]))], \
+$CellContext`zA[
+         Pattern[$CellContext`\[Theta], 
+          Blank[]], 
+         Pattern[$CellContext`\[Mu], 
+          Blank[]]] := $CellContext`joukowskiTransform[
+         $CellContext`\[Zeta]C[$CellContext`\[Theta], $CellContext`\[Mu]]], \
+$CellContext`joukowskiTransform[
+         Pattern[$CellContext`\[Zeta], 
+          Blank[]]] := 
+       0.5 ($CellContext`\[Zeta] + 1/$CellContext`\[Zeta]), $CellContext`xLE[
+         Pattern[$CellContext`\[Mu], 
+          Blank[]]] := Chop[
+         $CellContext`zA[
+          $CellContext`\[Theta]LE[$CellContext`\[Mu]], $CellContext`\[Mu]]], \
+$CellContext`\[Theta]LE[
+         Pattern[$CellContext`\[Mu], 
+          Blank[]]] := ReplaceAll[$CellContext`\[Theta], 
+         FindRoot[
+          Im[
+           $CellContext`zA[$CellContext`\[Theta], $CellContext`\[Mu]]], \
+{$CellContext`\[Theta], Pi}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.919371535096674*^9, 3.919371535380563*^9}},
+ CellLabel->
+  "Out[959]=",ExpressionUUID->"7c2177a1-5d2a-4cf8-9c35-2227ca9d1977"]
+}, Open  ]]
+},
+WindowSize->{718.5, 735.},
+WindowMargins->{{13.5, Automatic}, {Automatic, 23.25}},
+FrontEndVersion->"13.1 para Microsoft Windows (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"e49ef6ba-8c7d-4825-9a1b-f7cebe106853"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 13894, 365, 948, "Code",ExpressionUUID->"b78a2b2e-53f3-4484-b4e8-c2bfd363cf86"],
+Cell[14477, 389, 355, 9, 50, "Output",ExpressionUUID->"b8bd072e-f169-40f8-9890-dd48411f026a"],
+Cell[14835, 400, 357, 9, 50, "Output",ExpressionUUID->"824a894b-6863-4fbd-833a-c09bdf1a5753"],
+Cell[15195, 411, 7960, 176, 437, "Output",ExpressionUUID->"7c2177a1-5d2a-4cf8-9c35-2227ca9d1977"]
+}, Open  ]]
+}
+]
+*)
+
